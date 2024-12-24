@@ -2,6 +2,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import userRoutes from './routes/userRoutes.mjs'
+import fashionRoutes from './routes/fashionRoutes.mjs'
+import weatherRoutes from './routes/weatherRoutes.mjs'
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -25,8 +27,9 @@ app.use(express.json());
 await mongoose.connect(mongodbURI);
 console.log('Connected to MongoDB successfully!');
 
-
 app.use('/users', userRoutes)
+app.use('/fashion', fashionRoutes)
+app.use('/weather', weatherRoutes)
 
 
 
