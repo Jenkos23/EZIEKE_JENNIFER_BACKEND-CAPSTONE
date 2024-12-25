@@ -23,9 +23,21 @@ app.use(cors());
 app.use(express.json());
 
 
-//MongoDB connection
-await mongoose.connect(mongodbURI);
-console.log('Connected to MongoDB successfully!');
+// MongoDB connection
+const connectToDatabase = async () => {
+    try {
+        if (!mongodbURI) {
+            throw new Error('MongoDB URI is not defined!');
+        }
+        await mongoose.connect(mongodbURI, { useNewUrlParser: true, useUnifiedTopology: true });
+        console.log('Connected to MongoDB successfully!');
+    } catch (error) {
+        console.error('Error connecting to MongoDB:', error);
+        process.exit(1); // Exit the application if connection fails
+    }
+};
+
+connectToDatabase();
 
 app.use('/users', userRoutes)
 app.use('/fashion', fashionRoutes)
