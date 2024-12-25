@@ -1,4 +1,4 @@
-Sure! Below is an updated README file that reflects the presence of a `UserSchema` but without separate controllers, while still keeping the focus on the project's functionality and structure.
+
 
 ```markdown
 # Capstone Project: Weather & Fashion Data Backend
