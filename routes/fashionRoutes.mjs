@@ -1,5 +1,5 @@
 import express from "express";
-import fashionData from "../data/fashionData.mjs";
+import { designersData, fashionData } from "../data/fashionData.mjs";
 const router = express.Router();
 
 
@@ -33,25 +33,21 @@ router.get('/:id', (req, res) => {
       res.status(200).json(fashionItem);  // Respond with the found item
   });
 
-  
- //UPDATE: Update a fashion entry (case-insensitive, partial match by author)
-router.put('/:id', (req, res) => {
-    const searchName = req.params.id.toLowerCase();  // Convert search parameter to lowercase
-  
-    // Find the index of the fashion item where the author's name includes the search name (case-insensitive)
-    const index = fashionData.findIndex(item => item.author.toLowerCase().includes(searchName));
-  
-    if (index === -1) {
-      return res.status(404).json({ error: 'Fashion item not found' });
+
+// Route to get designer by ID
+router.get('/designer/:id', (req, res) => {
+    const designerId = parseInt(req.params.id);
+    
+    // Find the designer by the ID
+    const designer = designersData.find(d => d.id === designerId);
+
+    if (designer) {
+        res.json(designer);
+    } else {
+        res.status(404).json({ error: "Designer not found" });
     }
-  
-    // Update the fashion item at the found index
-    fashionData[index] = { ...fashionData[index], ...req.body };  // Merge the existing item with the update data
-    res.status(200).json(fashionData[index]);  // Respond with the updated item
-  });
-
-
-
+});
+   
 
 
   //DELETE:  Delete a fashion entry (case-insensitive, partial match by author)
