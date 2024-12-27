@@ -60,6 +60,28 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+//READ: Retrieve a specific user by name 
+router.get('/name', async (req, res) => {
+    try {
+        // Extract query parameters for name, email, and password
+        const { name, email, password } = req.query;
+
+        // Query the database for a user matching the provided name, email, and password
+        const user = await User.findOne({ name, email, password });
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Return the found user
+        res.json(user);
+
+    } catch (error) {
+        console.error('Error retrieving user by name, email, and password', error);
+        res.status(500).json({ message: error.message });
+    }
+});
+
 //UPDATE: Update user by Id
 router.put('/:id', async (req, res) =>{
     try {
