@@ -4,6 +4,7 @@ import cors from 'cors';
 import userRoutes from './routes/userRoutes.mjs'
 import fashionRoutes from './routes/fashionRoutes.mjs'
 import weatherRoutes from './routes/weatherRoutes.mjs'
+import itemRoutes from './routes/Item.mjs'
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -42,7 +43,7 @@ connectToDatabase();
 app.use('/users', userRoutes)
 app.use('/fashion', fashionRoutes)
 app.use('/weather', weatherRoutes)
-
+app.use('/item', itemRoutes)
 
 
 
