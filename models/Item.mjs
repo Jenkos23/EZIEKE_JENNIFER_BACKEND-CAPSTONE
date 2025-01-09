@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 const itemSchema = new mongoose.Schema({
   designer: { type: String, required: true },
-  design_description: String,
+  design_description: {type: String},
   createdAt: { type: Date, default: Date.now }
 });
 
